@@ -6,6 +6,7 @@ except AttributeError:
     pass
 import logging
 import uvicorn
+import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from backend.db.models import init_db
@@ -25,9 +26,10 @@ app = FastAPI(
 )
 
 # Enable CORS for frontend local development
+cors_origins = os.getenv("CORS_ALLOWED_ORIGINS", "*").split(",")
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"], # In production, restrict this to specific domains
+    allow_origins=cors_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"]
