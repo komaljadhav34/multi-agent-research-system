@@ -1,6 +1,6 @@
 import { useState, useCallback, useRef } from "react"
 
-const BACKEND_URL = "http://localhost:8000"
+const BACKEND_URL = import.meta.env.VITE_API_URL || "http://localhost:8000"
 
 export function useSSE() {
   const [status, setStatus] = useState("idle") // idle, planner, researcher, critic, writer
