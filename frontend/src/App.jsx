@@ -17,6 +17,8 @@ import {
   Settings
 } from "lucide-react"
 
+const BACKEND_URL = import.meta.env.VITE_API_URL || "http://localhost:8000"
+
 export default function App() {
   const {
     status,
@@ -41,7 +43,7 @@ export default function App() {
   // Fetch report history list on load
   const fetchHistory = async () => {
     try {
-      const res = await fetch("http://localhost:8000/api/history")
+      const res = await fetch(`${BACKEND_URL}/api/history`)
       if (res.ok) {
         const data = await res.json()
         setHistory(data)
@@ -65,7 +67,7 @@ export default function App() {
   // Restore history item details
   const loadHistoricalReport = async (id) => {
     try {
-      const res = await fetch(`http://localhost:8000/api/reports/${id}`)
+      const res = await fetch(`${BACKEND_URL}/api/reports/${id}`)
       if (res.ok) {
         const data = await res.json()
         
